@@ -20,6 +20,10 @@ Double-click `index.html` (or serve the folder with any static server).
 - **SCRAM** drops the whole bank in ~2 s. After a SCRAM only **RESET**
   restores control.
 - **RESET** returns the plant to its critical, 100 %-power reference state.
+- **🔊 / 🔇** toggles the alarm sounds — a slow beep in WARNING, a two-tone
+  klaxon in DANGEROUS, a continuous siren during meltdown (all synthesized
+  with the Web Audio API; no audio files). Browsers block sound until your
+  first click or keypress, after which alarms arm automatically.
 
 ### Things to try
 
@@ -93,5 +97,6 @@ irreversible until RESET). **Meltdown** latches when fuel reaches UO₂ melting
 | `style.css` | Control-room theme, alarm states, animations |
 | `physics.js` | Pure simulation engine (no DOM) — also loadable in Node |
 | `ui.js` | Renders a state snapshot to the DOM/SVG each frame |
+| `audio.js` | Synthesized warning/danger/meltdown alarm sounds (Web Audio) |
 | `main.js` | Controls wiring + requestAnimationFrame loop |
 | `test/physics.test.js` | Headless sanity tests: `node test/physics.test.js` |
