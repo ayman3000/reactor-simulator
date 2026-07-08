@@ -16,9 +16,103 @@
 
   <section id="plant">
     <svg id="schematic" viewBox="0 0 900 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PWR primary side schematic">
-      <!-- placeholder: replaced by the full schematic -->
-      <rect x="40" y="40" width="820" height="560" rx="16" fill="none" stroke="#1f2937" stroke-width="2"/>
-      <text x="450" y="330" class="svg-label" text-anchor="middle">schematic</text>
+      <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="14"/>
+        </filter>
+        <clipPath id="rod-clip">
+          <rect x="120" y="115" width="160" height="380"/>
+        </clipPath>
+      </defs>
+
+      <!-- containment -->
+      <rect x="40" y="50" width="820" height="555" rx="26" fill="none" stroke="#334155" stroke-width="2.5"/>
+      <text x="64" y="82" class="svg-label">CONTAINMENT</text>
+
+      <!-- primary loop pipes (drawn under vessel/SG) -->
+      <path id="hotleg-path"  d="M300 240 H560" stroke="#ef4444" stroke-width="14" fill="none" stroke-linecap="round"/>
+      <path id="coldleg-path" d="M560 480 H300" stroke="#3b82f6" stroke-width="14" fill="none" stroke-linecap="round"/>
+      <!-- invisible particle guides (direction of flow) -->
+      <path id="flow-hot"  d="M300 240 H560" fill="none" stroke="none"/>
+      <path id="flow-cold" d="M560 480 H300" fill="none" stroke="none"/>
+      <text x="462" y="224" class="svg-label" fill="#f87171">HOT LEG →</text>
+      <text x="470" y="524" class="svg-label" fill="#60a5fa">← COLD LEG</text>
+
+      <!-- reactor coolant pump on the cold leg -->
+      <circle cx="430" cy="480" r="22" fill="#1e293b" stroke="#3b82f6" stroke-width="3"/>
+      <path d="M430 465 L442 487 H418 Z" fill="#3b82f6"/>
+      <text x="430" y="530" class="svg-label" text-anchor="middle" font-size="10">RCP</text>
+
+      <!-- CRDM housing -->
+      <rect x="150" y="110" width="100" height="72" rx="8" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+      <text x="200" y="104" class="svg-label" text-anchor="middle" font-size="10">CONTROL ROD DRIVES</text>
+
+      <!-- reactor vessel -->
+      <rect x="100" y="180" width="200" height="380" rx="42" fill="#2a3442" stroke="#64748b" stroke-width="3.5"/>
+      <rect x="115" y="205" width="170" height="330" rx="30" fill="#12324d" opacity="0.55"/>
+      <text x="200" y="585" class="svg-label" text-anchor="middle">REACTOR VESSEL</text>
+
+      <!-- core glow (opacity/color driven by power) -->
+      <rect id="core-glow" x="118" y="288" width="164" height="222" rx="10" fill="#ff6a00" opacity="0.12" filter="url(#glow)"/>
+
+      <!-- fuel assemblies -->
+      <g id="fuel-rods">
+        <rect x="126" y="300" width="12" height="200" rx="2" fill="#f59e0b"/>
+        <rect x="146" y="300" width="12" height="200" rx="2" fill="#f59e0b"/>
+        <rect x="166" y="300" width="12" height="200" rx="2" fill="#f59e0b"/>
+        <rect x="186" y="300" width="12" height="200" rx="2" fill="#f59e0b"/>
+        <rect x="206" y="300" width="12" height="200" rx="2" fill="#f59e0b"/>
+        <rect x="226" y="300" width="12" height="200" rx="2" fill="#f59e0b"/>
+        <rect x="246" y="300" width="12" height="200" rx="2" fill="#f59e0b"/>
+        <rect x="266" y="300" width="12" height="200" rx="2" fill="#f59e0b"/>
+      </g>
+
+      <!-- molten corium puddle (revealed on meltdown) -->
+      <ellipse id="corium" cx="200" cy="545" rx="72" ry="12" fill="#ff3d00" opacity="0"/>
+
+      <!-- control rod bank: translate(0, -(1-insertion)*200); 0 = fully in -->
+      <g clip-path="url(#rod-clip)">
+        <g id="control-rods" transform="translate(0,-110)">
+          <rect x="137" y="292" width="8" height="200" rx="3" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+          <rect x="157" y="292" width="8" height="200" rx="3" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+          <rect x="177" y="292" width="8" height="200" rx="3" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+          <rect x="197" y="292" width="8" height="200" rx="3" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+          <rect x="217" y="292" width="8" height="200" rx="3" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+          <rect x="237" y="292" width="8" height="200" rx="3" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+          <rect x="257" y="292" width="8" height="200" rx="3" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+        </g>
+      </g>
+
+      <!-- pressurizer -->
+      <rect x="360" y="100" width="80" height="120" rx="22" fill="#241b0c" stroke="#f59e0b" stroke-width="3"/>
+      <path d="M372 196 h56 M372 184 h56 M372 172 h56" stroke="#f59e0b" stroke-width="2" opacity="0.6"/>
+      <path d="M400 220 V233" stroke="#f59e0b" stroke-width="6"/>
+      <text x="400" y="90" class="svg-label" text-anchor="middle">PRESSURIZER</text>
+
+      <!-- steam generator -->
+      <rect id="sg-body" x="560" y="170" width="170" height="370" rx="34" fill="#0e2a28" stroke="#14b8a6" stroke-width="3.5"/>
+      <path d="M590 480 V280 A28 28 0 0 1 646 280 V480" stroke="#14b8a6" stroke-width="5" fill="none" opacity="0.7"/>
+      <path d="M612 480 V300 A28 28 0 0 1 668 300 V480" stroke="#14b8a6" stroke-width="5" fill="none" opacity="0.45"/>
+      <text x="645" y="566" class="svg-label" text-anchor="middle">STEAM GENERATOR</text>
+
+      <!-- steam line to turbine + feedwater -->
+      <path d="M645 170 V112" stroke="#94a3b8" stroke-width="10"/>
+      <text x="668" y="112" class="svg-label" font-size="11">STEAM → TURBINE</text>
+      <path d="M730 500 H820" stroke="#60a5fa" stroke-width="8"/>
+      <text x="742" y="490" class="svg-label" font-size="11">FEEDWATER</text>
+
+      <!-- steam puffs (animated by ui.js) -->
+      <g id="steam">
+        <circle cx="645" cy="100" r="7" fill="#e2e8f0" opacity="0"/>
+        <circle cx="653" cy="95" r="9" fill="#e2e8f0" opacity="0"/>
+        <circle cx="638" cy="90" r="8" fill="#e2e8f0" opacity="0"/>
+        <circle cx="648" cy="85" r="10" fill="#e2e8f0" opacity="0"/>
+        <circle cx="640" cy="80" r="9" fill="#e2e8f0" opacity="0"/>
+        <circle cx="652" cy="75" r="11" fill="#e2e8f0" opacity="0"/>
+      </g>
+
+      <!-- coolant flow particles (spawned by ui.js) -->
+      <g id="particles"></g>
     </svg>
   </section>
 

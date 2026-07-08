@@ -50,6 +50,18 @@ header .sub { font-size: 12px; letter-spacing: 0; color: var(--dim); font-weight
   letter-spacing: 1px;
 }
 
+/* meltdown: fuel slumps white-hot, corium pools at the vessel bottom */
+#fuel-rods rect { transition: fill 1s; }
+#fuel-rods.melt rect {
+  fill: #fff7ed;
+  animation: slump 4s ease-in forwards;
+  transform-box: fill-box;
+  transform-origin: bottom;
+}
+@keyframes slump { to { transform: scaleY(0.35) scaleX(1.5); } }
+#corium { transition: opacity 3s; }
+#control-rods, #core-glow { transition: none; }
+
 /* ---- control panel ---- */
 #panel {
   background: var(--panel);
