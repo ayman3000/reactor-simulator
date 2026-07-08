@@ -4,12 +4,16 @@ An educational pressurized-water-reactor simulator in plain HTML/CSS/JavaScript,
 built around the reactor theory in **John R. Lamarsh, *Introduction to Nuclear
 Reactor Theory***. No dependencies, no build step.
 
+**▶️ [Try the live demo](https://ayman3000.github.io/reactor-simulator/)**
+
 > ⚠️ Educational use only. Parameters are representative, lumped, and tuned for
 > teaching — this is not a licensing-grade plant model.
 
 ## Run it
 
-Double-click `index.html` (or serve the folder with any static server).
+Open the [live demo](https://ayman3000.github.io/reactor-simulator/), or run it
+locally by double-clicking `index.html` (or serving the folder with any static
+server).
 
 ## Operating the reactor
 
