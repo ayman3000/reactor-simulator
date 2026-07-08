@@ -187,6 +187,14 @@ body[data-state="meltdown"]::after {
   border: 1px solid var(--dim);
 }
 #reset-btn:hover { border-color: var(--green); color: var(--green); }
+#mute-btn {
+  flex: 0 0 52px;
+  font-size: 18px;
+  background: var(--inset);
+  border: 1px solid var(--dim);
+}
+#mute-btn:hover { border-color: var(--green); }
+#mute-btn.muted { opacity: 0.5; }
 
 /* readouts */
 #readouts h2 {

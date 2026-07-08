@@ -37,12 +37,26 @@ document.getElementById('reset-btn').addEventListener('click', () => {
   applySlider();
 });
 
+// Alarm audio: browsers require a user gesture before sound can play
+['pointerdown', 'click', 'keydown'].forEach(ev =>
+  window.addEventListener(ev, () => Alarm.arm(), { once: true })
+);
+
+const muteBtn = document.getElementById('mute-btn');
+muteBtn.addEventListener('click', () => {
+  const muted = Alarm.toggleMute();
+  muteBtn.textContent = muted ? '🔇' : '🔊';
+  muteBtn.classList.toggle('muted', muted);
+});
+
 let last = performance.now();
 function frame(now) {
   const dt = Math.min(0.1, (now - last) / 1000); // clamp away tab-sleep jumps
   last = now;
   reactor.step(dt);
-  UI.render(reactor.getState(), dt * 1000);
+  const state = reactor.getState();
+  UI.render(state, dt * 1000);
+  Alarm.setState(state.status);
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
