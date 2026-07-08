@@ -6,6 +6,8 @@ Reactor Theory***. No dependencies, no build step.
 
 **▶️ [Try the live demo](https://ayman3000.github.io/reactor-simulator/)**
 
+![Lamarsh PWR-1000 simulator screenshot](docs/screenshot.png)
+
 > ⚠️ Educational use only. Parameters are representative, lumped, and tuned for
 > teaching — this is not a licensing-grade plant model.
 
