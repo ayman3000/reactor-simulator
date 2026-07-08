@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lamarsh PWR-1000 — Nuclear Reactor Simulator</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-state="safe">
+
+<header>
+  <h1>LAMARSH PWR-1000 <span class="sub">Pressurized Water Reactor Simulator — point kinetics, 6 delayed groups</span></h1>
+</header>
+
+<main class="layout">
+
+  <section id="plant">
+    <svg id="schematic" viewBox="0 0 900 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PWR primary side schematic">
+      <!-- placeholder: replaced by the full schematic -->
+      <rect x="40" y="40" width="820" height="560" rx="16" fill="none" stroke="#1f2937" stroke-width="2"/>
+      <text x="450" y="330" class="svg-label" text-anchor="middle">schematic</text>
+    </svg>
+  </section>
+
+  <aside id="panel">
+
+    <div id="status" class="annunciator">REACTOR SAFE</div>
+
+    <div class="gauges">
+      <div class="gauge" id="bar-power">
+        <div class="gauge-head"><span class="bar-label">Thermal power</span><span class="bar-value">—</span></div>
+        <div class="bar"><div class="bar-fill"></div></div>
+      </div>
+      <div class="gauge" id="bar-tfuel">
+        <div class="gauge-head"><span class="bar-label">Fuel centerline temp</span><span class="bar-value">—</span></div>
+        <div class="bar"><div class="bar-fill"></div></div>
+      </div>
+      <div class="gauge" id="bar-tcool">
+        <div class="gauge-head"><span class="bar-label">Coolant outlet temp</span><span class="bar-value">—</span></div>
+        <div class="bar"><div class="bar-fill"></div></div>
+      </div>
+      <div class="gauge" id="bar-pressure">
+        <div class="gauge-head"><span class="bar-label">Primary pressure</span><span class="bar-value">—</span></div>
+        <div class="bar"><div class="bar-fill"></div></div>
+      </div>
+      <div class="gauge" id="bar-rods">
+        <div class="gauge-head"><span class="bar-label">Rod insertion (actual)</span><span class="bar-value">—</span></div>
+        <div class="bar"><div class="bar-fill"></div></div>
+      </div>
+    </div>
+
+    <div class="rod-control">
+      <div class="gauge-head">
+        <span class="bar-label">Control rod bank — insertion target</span>
+        <span id="rod-readout">45 %</span>
+      </div>
+      <div class="rod-row">
+        <button id="rod-out" title="Withdraw 1 %">▲ OUT</button>
+        <input type="range" id="rod-slider" min="0" max="100" step="0.5" value="45">
+        <button id="rod-in" title="Insert 1 %">▼ IN</button>
+      </div>
+      <p class="hint">0 % = fully withdrawn (adds reactivity) · 100 % = fully inserted</p>
+    </div>
+
+    <div class="buttons">
+      <button id="scram-btn">SCRAM</button>
+      <button id="reset-btn">RESET</button>
+    </div>
+
+    <div id="readouts">
+      <h2>Calculated parameters</h2>
+      <div class="ro-grid">
+        <div class="ro"><span>k<sub>eff</sub></span><b id="ro-keff">—</b></div>
+        <div class="ro"><span>Reactivity ρ</span><b id="ro-rho">—</b></div>
+        <div class="ro"><span>Period τ</span><b id="ro-period">—</b></div>
+        <div class="ro"><span>Flux φ</span><b id="ro-flux">—</b></div>
+        <div class="ro"><span>Σ<sub>a</sub> total</span><b id="ro-sigma-total">—</b></div>
+        <div class="ro"><span>Σ<sub>a</sub> rods</span><b id="ro-sigma-rods">—</b></div>
+        <div class="ro"><span>Therm. util. f</span><b id="ro-f">—</b></div>
+        <div class="ro"><span>Fast fission ε</span><b id="ro-eps">—</b></div>
+        <div class="ro"><span>Res. escape p</span><b id="ro-p">—</b></div>
+        <div class="ro"><span>Reprod. η</span><b id="ro-eta">—</b></div>
+        <div class="ro"><span>k<sub>∞</sub> = εpfη</span><b id="ro-kinf">—</b></div>
+        <div class="ro"><span>P<sub>f</sub>·P<sub>t</sub></span><b id="ro-pnl">—</b></div>
+        <div class="ro wide"><span>Elapsed time</span><b id="ro-time">—</b></div>
+      </div>
+    </div>
+
+  </aside>
+</main>
+
+</body>
+</html>
